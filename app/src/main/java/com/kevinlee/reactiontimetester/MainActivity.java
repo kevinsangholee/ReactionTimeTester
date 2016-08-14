@@ -1,29 +1,28 @@
 package com.kevinlee.reactiontimetester;
 
-import android.media.Image;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    boolean pressedEarly = false;
     private long currentTime;
     private long elapsedTime;
-    boolean pressedEarly = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        displayHighScore();
     }
 
     /**
@@ -69,14 +68,22 @@ public class MainActivity extends AppCompatActivity {
      * @param v the green button
      */
     public void reactionClick(View v) {
-        Button restart_button = (Button) findViewById(R.id.restart_button);
         elapsedTime = System.currentTimeMillis() - currentTime;
+        Button restart_button = (Button) findViewById(R.id.restart_button);
+
 
         String message = "Good job! Your reaction time was " + String.valueOf(elapsedTime) + " milliseconds.";
         setFinalMessage(message);
 
         v.setClickable(false);
         restart_button.setVisibility(View.VISIBLE);
+
+        int highScore = getHighScore();
+        if (elapsedTime < highScore) {
+            setHighScore((int) elapsedTime);
+            displayHighScore();
+        }
+
     }
 
     /**
@@ -121,6 +128,36 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setPressedEarly() {
         pressedEarly = true;
+    }
+
+    /**
+     * Displays the high score.
+     */
+    private void displayHighScore() {
+        TextView highScore = (TextView) findViewById(R.id.high_score_text_view);
+        highScore.setText(getString(R.string.high_score, getHighScore()));
+    }
+
+    /**
+     * Gets the high score.
+     *
+     * @return int high score
+     */
+    private int getHighScore() {
+        SharedPreferences prefs = this.getSharedPreferences("high_scores", Context.MODE_PRIVATE);
+        return prefs.getInt("highScore", 50000);
+    }
+
+    /**
+     * sets the high score.
+     *
+     * @param score the high score
+     */
+    private void setHighScore(int score) {
+        SharedPreferences prefs = this.getSharedPreferences("high_scores", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("highScore", score);
+        editor.apply();
     }
 
 }

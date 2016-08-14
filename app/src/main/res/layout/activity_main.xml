@@ -13,7 +13,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="Test your reaction here!"
@@ -24,15 +23,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="@string/instructions" />
+
+    <TextView
+        android:id="@+id/high_score_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="Current high score:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="20dp">
 
         <ImageView
             android:id="@+id/redButton"
@@ -59,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="Great job!"
         android:textSize="20sp"
@@ -70,8 +79,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Restart"
         android:onClick="restart"
+        android:text="Restart"
         android:visibility="invisible" />
 
 </LinearLayout>

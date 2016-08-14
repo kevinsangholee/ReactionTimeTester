@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ReactionTimeTester</string>
     <string name="instructions">Press the red button. As soon as you see the red button turn green, press the button again as fast as you can.</string>
+    <string name="high_score">Current high score: %d milliseconds</string>
 </resources>
